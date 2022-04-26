@@ -8,12 +8,7 @@ const CHANGE_TASK_NAME_TEXT = 'CHANGE_TASK_NAME_TEXT';
 let initialState = {
     newText: '',
     newNameText: '',
-    tasks: [
-        {
-            taskName:'',
-            tasktext: ''
-        }
-    ],
+    tasks: [],
 
 }
 

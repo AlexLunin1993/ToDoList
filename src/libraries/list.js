@@ -2,42 +2,45 @@ import React from 'react';
 import '../App.css';
 
 const List = (props) => {
-    let taskElements = props.tasks.tasks.map((TE, index) => {
-        debugger
-        let itemTaskName = TE.taskName;
-        let itemTask = TE.tasktext;
-        let i = index;
-        if (i !== 0) {
-            return (
-                <div className='row'>
-                    <div className='alert alert-info alert-size'>
-                        <div className='fs-5 fw-bold text-wrap'>{i}.  {itemTaskName}</div>
-                        <div className='fs-6 text-wrap'>  {itemTask} </div>
-                        <button className='btn btn-danger pull-right'
-                            onClick={() => props.deleteTask(i)}>
-                            <p> Удалить задачу </p>
-                        </button>
-                    </div>
+    const renderTasks = (taskName, taskText, index) => {
+        return (
+            <div className='row'>
+                <div className='alert alert-info alert-size'>
+                    <div className='fs-5 fw-bold text-wrap'>{index+1}.  {taskName}</div>
+                    <div className='fs-6 text-wrap'>  {taskText} </div>
+                    <button className='btn btn-danger pull-right'
+                            onClick={() => props.deleteTask(index)}>Удалить задачу</button>
                 </div>
-            )
-        }
+            </div>
+        )
     }
-    )
 
     return (
         <div className='container'>
             <div className='form-group'>
                 Имя задачи:
-                <textarea className='form-control' type='text'
-                    onChange={props.changeTaskNameText} value={props.tasks.newNameText}> </textarea>
+                    <textarea 
+                        className='form-control' 
+                        type='text'
+                        onChange={props.changeTaskNameText} 
+                        value={props.tasks.newNameText}/>
                 Описание задачи:
-                <textarea className='form-control' type='text'
-                    onChange={props.changeText} value={props.tasks.newText}> </textarea>
-                <button className='btn btn-success pull-right' onClick={props.addTask}>Добавить задачу</button>
+                    <textarea 
+                        className='form-control' 
+                        type='text'
+                        onChange={props.changeText}
+                        value={props.tasks.newText}/>
+                <button 
+                className='btn btn-success pull-right' 
+                onClick={props.addTask}>Добавить задачу</button>
 
             </div>
             <div>
-                {taskElements}
+                {
+                    props.tasks.tasks.length > 0 && props.tasks.tasks.map((TE, index) => 
+                    renderTasks(TE.taskName, TE.tasktext, index)
+                )
+                }
             </div>
         </div>
     );
